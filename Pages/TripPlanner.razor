@@ -1,0 +1,31 @@
+@page "/tripplanner"
+@using WeatherApp.Models
+@using WeatherApp.Services
+@inject ICountryService CountryService
+
+<div class="app-container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>🌍 Trip Planner</h2>
+ <div class="trip-card mb-3">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h4>🏳️ @countryInfo.Name.Common</h4>
+                    <p class="mb-1">Region: @countryInfo.Region</p>
+                    <p class="mb-1">Capital: @countryInfo.Capital?.FirstOrDefault()</p>
+                    <p>Population: @String.Format("{0:N0}", countryInfo.Population)</p>
+                </div>
+                <div>
+                    @if (!string.IsNullOrEmpty(countryInfo.Flags.Png))
+                    {
+                        <img src="@countryInfo.Flags.Png" alt="flag" width="100" class="rounded shadow-sm" />
+                    }
+                   
+                </div>
+            </div>
+</div>
+@code {
+  
+    private CountryInfo? countryInfo;
+    private string? capitalName;
+    private string? errorMessage;
+    private bool loading = false;
