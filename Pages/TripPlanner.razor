@@ -1,11 +1,18 @@
 @page "/tripplanner"
 @using WeatherApp.Models
 @using WeatherApp.Services
+@inject IWeatherService WeatherService
 @inject ICountryService CountryService
 
 <div class="app-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>🌍 Trip Planner</h2>
+ <div>
+            <input @bind="searchCountry" @bind:event="oninput" placeholder="Search country (e.g., France)" 
+                   class="form-control d-inline-block" style="width:240px" />
+            <button class="btn btn-primary ms-2" @onclick="SearchCountry">Search</button>
+            
+        </div>
  <div class="trip-card mb-3">
             <div class="d-flex justify-content-between">
                 <div>
