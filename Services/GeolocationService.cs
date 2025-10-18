@@ -11,3 +11,27 @@ public class IpApiResponse
     public double lat { get; set; }
     public double lon { get; set; }
 }
+Public class GeolocationService : ILocationService
+{
+    private readonly HttpClient _http;
+    private readonly string _openWeatherApiKey;
+
+    public GeolocationService(HttpClient http, IConfiguration config)
+    {
+        _http = http;
+        _openWeatherApiKey = config["OpenWeatherApiKey"] ?? "";
+    }
+
+    public async Task<TripLocation> GetUserLocationAsync()
+    {
+      
+        var resp = await _http.GetFromJsonAsync<IpApiResponse>("http://ip-api.com/json/");
+        return new TripLocation
+        {
+            City = resp?.city ?? "Unknown",
+            Country = resp?.country ?? "Unknown",
+            Latitude = resp?.lat ?? 0,
+            Longitude = resp?.lon ?? 0
+        };
+    }
+
