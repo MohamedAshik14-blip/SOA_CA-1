@@ -13,6 +13,19 @@
             <button class="btn btn-primary ms-2" @onclick="SearchCountry">Search</button>
             
         </div>
+@if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    else if (loading)
+    {
+        <div class="d-flex align-items-center">
+            <div class="spinner-border me-3" role="status"></div>
+            <div>Loading trip info...</div>
+        </div>
+    }
+    else if (countryInfo != null)
+    {
  <div class="trip-card mb-3">
             <div class="d-flex justify-content-between">
                 <div>
@@ -30,6 +43,7 @@
                 </div>
             </div>
 </div>
+}
 @code {
   
     private CountryInfo? countryInfo;
