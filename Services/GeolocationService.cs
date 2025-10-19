@@ -35,3 +35,23 @@ Public class GeolocationService : ILocationService
         };
     }
 
+     public async Task<TripLocation?> GetLocationByCityAsync(string city)
+    {
+        if (string.IsNullOrWhiteSpace(city)) return null;
+
+        var url = $"https://api.openweathermap.org/data/2.5/weather?q={Uri.EscapeDataString(city)}&appid={_openWeatherApiKey}";
+        var data = await _http.GetFromJsonAsync<JsonElement>(url);
+
+        if (!data.TryGetProperty("coord", out var coord))
+            return null;
+
+        return new TripLocation
+        {
+            City = city,
+            Latitude = coord.GetProperty("lat").GetDouble(),
+            Longitude = coord.GetProperty("lon").GetDouble(),
+            Country = data.GetProperty("sys").GetProperty("country").GetString() ?? "Unknown"
+        };
+    }
+}
+
