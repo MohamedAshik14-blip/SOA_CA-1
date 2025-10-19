@@ -3,17 +3,22 @@
 @using WeatherApp.Services
 @inject IWeatherService WeatherService
 @inject ICountryService CountryService
+@inject CitySuggestionService CityService
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+@inject ILocationService LocationService 
 
 <div class="app-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>🌍 Trip Planner</h2>
- <div>
+        <div>
             <input @bind="searchCountry" @bind:event="oninput" placeholder="Search country (e.g., France)" 
                    class="form-control d-inline-block" style="width:240px" />
             <button class="btn btn-primary ms-2" @onclick="SearchCountry">Search</button>
-            
+            <button class="btn btn-outline-secondary ms-2" @onclick="LoadFavorites">Favorites</button>
         </div>
-@if (!string.IsNullOrEmpty(errorMessage))
+    </div>
+
+    @if (!string.IsNullOrEmpty(errorMessage))
     {
         <div class="alert alert-danger">@errorMessage</div>
     }
@@ -26,7 +31,7 @@
     }
     else if (countryInfo != null)
     {
- <div class="trip-card mb-3">
+        <div class="trip-card mb-3">
             <div class="d-flex justify-content-between">
                 <div>
                     <h4>🏳️ @countryInfo.Name.Common</h4>
@@ -39,11 +44,13 @@
                     {
                         <img src="@countryInfo.Flags.Png" alt="flag" width="100" class="rounded shadow-sm" />
                     }
-                   
+                    <div class="mt-2">
+                        <button class="btn btn-outline-success" @onclick="SaveFavorite">Save Favorite</button>
+                    </div>
                 </div>
             </div>
-</div>
-}
+
+            <hr />
 @code {
   
     private CountryInfo? countryInfo;
