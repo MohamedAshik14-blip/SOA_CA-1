@@ -49,3 +49,11 @@ namespace WeatherApp.Services
                 return null;
             }
         }
+         public class OpenWeatherCurrent
+    {
+        public Coord Coord { get; set; } = new();
+        public Weather[] Weather { get; set; } = Array.Empty<Weather>();
+        public Main Main { get; set; } = new();
+        public long Dt { get; set; }
+    }
+
