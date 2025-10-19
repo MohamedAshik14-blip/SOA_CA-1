@@ -18,11 +18,11 @@ builder.Services.AddScoped<ILocationService, GeolocationService>();
 builder.Services.AddScoped<ICountryService, CountryService>();
 
 
-var openWeatherApiKey = "b19e2b255e902a5581acc442253764a0";
+ar openWeatherApiKey = "b19e2b255e902a5581acc442253764a0";
 builder.Services.AddScoped<IWeatherService>(sp =>
 {
     var http = sp.GetRequiredService<HttpClient>();
-    return
+    return new OpenWeatherService(http, openWeatherApiKey);
 });
 
 await builder.Build().RunAsync();
