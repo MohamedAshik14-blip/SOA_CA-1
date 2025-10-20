@@ -49,6 +49,54 @@ namespace WeatherApp.Services
                 return null;
             }
         }
+          public async Task<List<WeatherInfo>> GetForecastAsync(double lat, double lon)
+        {
+            var list = new List<WeatherInfo>();
+            if (lat == 0 && lon == 0) return list;
+
+            var url = $"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units=metric&appid={_apiKey}";
+
+            try
+            {
+                var resp = await _http.GetFromJsonAsync<ForecastResponse>(url);
+                if (resp?.List == null) return list;
+
+                var dailyGroups = resp.List
+                    .GroupBy(x => DateTimeOffset.FromUnixTimeSeconds(x.Dt).Date)
+                    .Take(3);
+
+                foreach (var g in dailyGroups)
+                {
+                    var first = g.First();
+                    var wt = first.Weather.FirstOrDefault()?.Main ?? "";
+                    var type = wt switch
+                    {
+                        "Clear" => WeatherType.Sunny,
+                        "Clouds" => WeatherType.Cloudy,
+                        "Rain" => WeatherType.Rainy,
+                        "Snow" => WeatherType.Snowy,
+                        _ => WeatherType.Unknown
+                    };
+
+                    list.Add(new WeatherInfo
+                    {
+                        Date = g.Key,
+                        TemperatureC = first.Main.Temp,
+                        Type = type,
+                        Description = first.Weather.FirstOrDefault()?.Description ?? ""
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Forecast API error: {ex.Message}");
+            }
+
+            return list;
+        }
+    }
+
+
          public class OpenWeatherCurrent
     {
         public Coord Coord { get; set; } = new();
