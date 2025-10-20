@@ -150,6 +150,11 @@
         }
     }
 
+ private async Task LoadFavorites()
+    {
+        favorites = await LocalStorage.GetItemAsync<List<string>>("favorites") ?? new();
+    }
+
 
     private async Task LoadCountry(string name)
     {
