@@ -105,3 +105,15 @@ namespace WeatherApp.Services
         public long Dt { get; set; }
     }
 
+   public class ForecastResponse { public ForecastItem[] List { get; set; } = Array.Empty<ForecastItem>(); }
+    public class ForecastItem
+    {
+        public long Dt { get; set; }
+        public Main Main { get; set; } = new();
+        public Weather[] Weather { get; set; } = Array.Empty<Weather>();
+    }
+
+    public class Coord { public double Lon { get; set; } public double Lat { get; set; } }
+    public class Weather { public string Main { get; set; } = ""; public string Description { get; set; } = ""; }
+    public class Main { public double Temp { get; set; } }
+}
