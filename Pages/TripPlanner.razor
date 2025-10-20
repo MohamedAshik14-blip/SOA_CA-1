@@ -83,8 +83,83 @@
             <hr />
 
 @code {
-  
+    private string searchCountry = "";
     private CountryInfo? countryInfo;
+    private WeatherInfo? currentWeather;
+    private List<WeatherInfo> forecast = new();
     private string? capitalName;
     private string? errorMessage;
     private bool loading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        loading = true;
+        try
+        {
+           
+            var location = await LocationService.GetUserLocationAsync();
+            searchCountry = location.Country;
+
+            
+            await SearchCountry();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to get location: {ex.Message}";
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+
+    private async Task SearchCountry()
+    {
+        if (string.IsNullOrWhiteSpace(searchCountry)) return;
+        loading = true;
+        errorMessage = null;
+
+        try
+        {
+            countryInfo = await CountryService.GetCountryInfoAsync(searchCountry);
+            if (countryInfo == null)
+            {
+                errorMessage = "Country not found.";
+                return;
+            }
+
+            capitalName = countryInfo.Capital?.FirstOrDefault();
+            if (!string.IsNullOrEmpty(capitalName))
+            {
+                currentWeather = await WeatherService.GetCurrentWeatherAsync(capitalName);
+                forecast = await WeatherService.GetForecastAsync(currentWeather.Latitude, currentWeather.Longitude);
+            }
+
+            if (!string.IsNullOrEmpty(countryInfo.Cca2))
+                topCities = await CityService.GetTopCitiesAsync(countryInfo.Cca2);
+
+            favorites = await LocalStorage.GetItemAsync<List<string>>("favorites") ?? new();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Search failed: {ex.Message}";
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+
+
+    private async Task LoadCountry(string name)
+    {
+        searchCountry = name;
+        await SearchCountry();
+    }
+
+    private async Task RemoveFavorite(string fav)
+    {
+        favorites.Remove(fav);
+        await LocalStorage.SetItemAsync("favorites", favorites);
+    }
+}
