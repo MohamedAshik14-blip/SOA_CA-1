@@ -217,6 +217,53 @@
         StateHasChanged();
     }
 
+private void ResetFilters()
+    {
+        minTemp = -50;
+        maxTemp = 50;
+        selectedWeather = "";
+        maxDistanceKm = 20000;
+        sortBy = "population";
+        ApplyFilters();
+    }
+
+    private void LoadMore() => displayCount = Math.Min(filteredCities.Count, displayCount + pageSize);
+
+    private async Task ShowCityDetails(CityWithWeather item)
+    {
+        selectedCity = item;
+        cityForecast = await WeatherService.GetForecastAsync(item.City.Latitude, item.City.Longitude);
+        showDetails = true;
+        StateHasChanged();
+    }
+
+    private double GetDistanceKm(double lat1, double lon1, double lat2, double lon2)
+    {
+        static double ToRad(double deg) => deg * Math.PI / 180.0;
+        const double R = 6371.0;
+        var dLat = ToRad(lat2 - lat1);
+        var dLon = ToRad(lon2 - lon1);
+        var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2)
+                + Math.Cos(ToRad(lat1)) * Math.Cos(ToRad(lat2))
+                * Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+        var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+        return R * c;
+    }
+
+    private async Task SaveFavorite()
+    {
+        if (countryInfo == null) return;
+        var label = countryInfo.Name.Common;
+        favorites = await LocalStorage.GetItemAsync<List<string>>("favorites") ?? new();
+        if (!favorites.Contains(label))
+        {
+            favorites.Add(label);
+            await LocalStorage.SetItemAsync("favorites", favorites);
+        }
+        showFavorites = true;
+        StateHasChanged();
+    }
+
  private async Task LoadFavorites()
     {
         favorites = await LocalStorage.GetItemAsync<List<string>>("favorites") ?? new();
