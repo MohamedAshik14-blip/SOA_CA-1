@@ -186,7 +186,36 @@
             StateHasChanged();
         }
     }
+ private async Task<CityWithWeather?> EnrichCityAsync(GeoCityDto city)
+    {
+        try
+        {
+            var query = $"{city.Name},{city.CountryCode}";
+            var w = await WeatherService.GetCurrentWeatherAsync(query);
+            if (w == null) return null;
+            var dist = GetDistanceKm(userLocation.Latitude, userLocation.Longitude, city.Latitude, city.Longitude);
+            return new CityWithWeather(city, w, dist);
+        }
+        catch { return null; }
+    }
 
+    private void ApplyFilters()
+    {
+        var q = enrichedCities.AsEnumerable()
+            .Where(c => c.Weather.TemperatureC >= minTemp && c.Weather.TemperatureC <= maxTemp)
+            .Where(c => string.IsNullOrEmpty(selectedWeather) || c.Weather.Type.ToString() == selectedWeather)
+            .Where(c => c.DistanceKm <= maxDistanceKm);
+
+        q = sortBy switch
+        {
+            "distance" => q.OrderBy(c => c.DistanceKm),
+            "temperature" => q.OrderBy(c => c.Weather.TemperatureC),
+            _ => q.OrderByDescending(c => c.City.Population)
+        };
+
+        filteredCities = q.ToList();
+        StateHasChanged();
+    }
 
  private async Task LoadFavorites()
     {
