@@ -5,16 +5,19 @@
 @inject ICountryService CountryService
 @inject CitySuggestionService CityService
 @inject Blazored.LocalStorage.ILocalStorageService LocalStorage
-@inject ILocationService LocationService 
+@inject ILocationService LocationService
+
+<link href="css/tripplanner.css" rel="stylesheet" />
 
 <div class="app-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>🌍 Trip Planner</h2>
-        <div>
-            <input @bind="searchCountry" @bind:event="oninput" placeholder="Search country (e.g., France)" 
-                   class="form-control d-inline-block" style="width:240px" />
-            <button class="btn btn-primary ms-2" @onclick="SearchCountry">Search</button>
-            <button class="btn btn-outline-secondary ms-2" @onclick="LoadFavorites">Favorites</button>
+        <h2 class="page-title">🌍 Trip Planner</h2>
+        <div class="d-flex align-items-center">
+            <input @bind="searchCountry" @bind:event="oninput"
+                   placeholder="Search city or country (e.g., Dublin or Ireland)"
+                   class="form-control search-input me-2" />
+            <button class="btn btn-primary me-2" @onclick="SearchCountryOrCity">Search</button>
+            <button class="btn btn-outline-secondary" @onclick="ToggleFavorites">@((showFavorites) ? "Hide" : "Favorites")</button>
         </div>
     </div>
 
@@ -24,7 +27,7 @@
     }
     else if (loading)
     {
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center py-5 justify-content-center">
             <div class="spinner-border me-3" role="status"></div>
             <div>Loading trip info...</div>
         </div>
@@ -32,76 +35,67 @@
     else if (countryInfo != null)
     {
         <div class="trip-card mb-3">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between align-items-start">
                 <div>
-                    <h4>🏳️ @countryInfo.Name.Common</h4>
-                    <p class="mb-1">Region: @countryInfo.Region</p>
-                    <p class="mb-1">Capital: @countryInfo.Capital?.FirstOrDefault()</p>
-                    <p>Population: @String.Format("{0:N0}", countryInfo.Population)</p>
+                    <h4 class="country-name">🏳️ @countryInfo.Name.Common</h4>
+                    <div class="muted">@countryInfo.Region</div>
+                    <div class="muted">Capital: @countryInfo.Capital?.FirstOrDefault()</div>
+                    <div class="muted">Population: @String.Format("{0:N0}", countryInfo.Population)</div>
                 </div>
-                <div>
+
+                <div class="text-end">
                     @if (!string.IsNullOrEmpty(countryInfo.Flags.Png))
                     {
-                        <img src="@countryInfo.Flags.Png" alt="flag" width="100" class="rounded shadow-sm" />
+                        <img src="@countryInfo.Flags.Png" width="120" alt="flag" class="flag-img" />
                     }
                     <div class="mt-2">
-                        <button class="btn btn-outline-success" @onclick="SaveFavorite">Save Favorite</button>
+                        <button class="btn btn-success" @onclick="SaveFavorite">⭐ Save Favorite</button>
                     </div>
                 </div>
-            </div>
-
-            <hr />
-
-            <h5>🌤 Capital Weather (@capitalName)</h5>
-            @if (currentWeather != null)
-            {
-                <div class="p-3 bg-light rounded">
-                    <div class="fs-4">@currentWeather.TemperatureC.ToString("0.0")°C</div>
-                    <div>@currentWeather.Type — @currentWeather.Description</div>
-                    <div class="text-muted">@currentWeather.Date.ToString("f")</div>
-                </div>
-            }
-            else
-            {
-                <div>No weather data available</div>
-            }
-
-            <hr />
-
-            <h5>📅 3-Day Forecast</h5>
-            <div class="d-flex gap-3 flex-wrap">
-                @foreach (var d in forecast)
-                {
-                    <div class="p-3 bg-light rounded shadow-sm text-center">
-                        <div>@d.Date.ToString("ddd, MMM d")</div>
-                        <div class="fs-5">@d.TemperatureC.ToString("0.0")°C</div>
-                        <div class="text-muted">@d.Type</div>
-                    </div>
-                }
             </div>
 
             <hr />
 
 @code {
+    private record CityWithWeather(GeoCityDto City, WeatherInfo Weather, double DistanceKm);
+
     private string searchCountry = "";
     private CountryInfo? countryInfo;
     private WeatherInfo? currentWeather;
     private List<WeatherInfo> forecast = new();
+    private List<string> favorites = new();
+    private List<GeoCityDto> topCities = new();
+    private List<CityWithWeather> enrichedCities = new();
+    private List<CityWithWeather> filteredCities = new();
+    private TripLocation userLocation = new();
+
     private string? capitalName;
     private string? errorMessage;
     private bool loading = false;
+    private bool showFavorites = false;
+
+    private int pageSize = 6;
+    private int displayCount = 6;
+
+    private double minTemp = -50;
+    private double maxTemp = 50;
+    private string selectedWeather = "";
+    private int maxDistanceKm = 20000;
+    private string sortBy = "population";
+
+  
+    private bool showDetails = false;
+    private CityWithWeather? selectedCity;
+    private List<WeatherInfo> cityForecast = new();
 
     protected override async Task OnInitializedAsync()
     {
         loading = true;
         try
         {
-           
-            var location = await LocationService.GetUserLocationAsync();
-            searchCountry = location.Country;
-
-            
-            await SearchCountry();
+            userLocation = await LocationService.GetUserLocationAsync();
+            searchCountry = userLocation.Country;
+            await SearchCountryOrCity();
         }
         catch (Exception ex)
         {
@@ -113,30 +107,72 @@
         }
     }
 
-    private async Task SearchCountry()
+    private async Task SearchCountryOrCity()
     {
         if (string.IsNullOrWhiteSpace(searchCountry)) return;
         loading = true;
         errorMessage = null;
+        enrichedCities.Clear();
+        filteredCities.Clear();
+        displayCount = pageSize;
 
         try
         {
+          
             countryInfo = await CountryService.GetCountryInfoAsync(searchCountry);
-            if (countryInfo == null)
+
+            if (countryInfo != null)
             {
-                errorMessage = "Country not found.";
-                return;
+                capitalName = countryInfo.Capital?.FirstOrDefault();
+                if (!string.IsNullOrEmpty(capitalName))
+                {
+                    currentWeather = await WeatherService.GetCurrentWeatherAsync(capitalName);
+                    forecast = await WeatherService.GetForecastAsync(currentWeather.Latitude, currentWeather.Longitude);
+                }
+
+                var code = !string.IsNullOrEmpty(countryInfo.Cca2)
+                    ? countryInfo.Cca2
+                    : ExtractCountryCode(countryInfo.Name.Common);
+
+                topCities = await CityService.GetTopCitiesAsync(code, max: 100);
+            }
+            else
+            {
+               
+                var w = await WeatherService.GetCurrentWeatherAsync(searchCountry);
+                if (w != null)
+                {
+                    countryInfo = new CountryInfo
+                    {
+                        Name = new() { Common = searchCountry },
+                        Capital = new List<string> { searchCountry },
+                        Population = 0,
+                        Flags = new Flags { Png = "" },
+                        Region = "N/A"
+                    };
+                    topCities = new List<GeoCityDto>
+                    {
+                        new GeoCityDto
+                        {
+                            Name = searchCountry,
+                            Latitude = w.Latitude,
+                            Longitude = w.Longitude,
+                            CountryName = "N/A",
+                            Population = 0,
+                            CountryCode = "",
+                            AdminName1 = ""
+                        }
+                    };
+                }
             }
 
-            capitalName = countryInfo.Capital?.FirstOrDefault();
-            if (!string.IsNullOrEmpty(capitalName))
+            if (topCities.Any())
             {
-                currentWeather = await WeatherService.GetCurrentWeatherAsync(capitalName);
-                forecast = await WeatherService.GetForecastAsync(currentWeather.Latitude, currentWeather.Longitude);
+                var tasks = topCities.Select(city => EnrichCityAsync(city)).ToArray();
+                var results = await Task.WhenAll(tasks);
+                enrichedCities = results.Where(r => r != null).Select(r => r!).ToList();
+                ApplyFilters();
             }
-
-            if (!string.IsNullOrEmpty(countryInfo.Cca2))
-                topCities = await CityService.GetTopCitiesAsync(countryInfo.Cca2);
 
             favorites = await LocalStorage.GetItemAsync<List<string>>("favorites") ?? new();
         }
@@ -147,8 +183,10 @@
         finally
         {
             loading = false;
+            StateHasChanged();
         }
     }
+
 
  private async Task LoadFavorites()
     {
