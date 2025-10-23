@@ -177,6 +177,44 @@
             }
         </div>
     }
+@if (showDetails && selectedCity != null)
+    {
+        <div class="modal-backdrop fade show"></div>
+        <div class="modal fade show d-block" tabindex="-1" style="background-color:rgba(0,0,0,0.4)">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@selectedCity.City.Name — 3-Day Forecast</h5>
+                        <button type="button" class="btn-close" @onclick="() => showDetails = false"></button>
+                    </div>
+                    <div class="modal-body">
+                        @if (cityForecast.Any())
+                        {
+                            <div class="row text-center">
+                                @foreach (var f in cityForecast)
+                                {
+                                    <div class="col-md-4 mb-3">
+                                        <div class="border rounded p-3 shadow-sm">
+                                            <div class="fw-bold">@f.Date.ToString("dd/MM/yyyy")</div>
+
+                                            <div class="display-6">@f.TemperatureC.ToString("0.0")°C</div>
+                                            <div>@f.Type</div>
+                                            <div class="small text-muted">@f.Description</div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center text-muted py-4">No forecast data available.</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 @code {
     private record CityWithWeather(GeoCityDto City, WeatherInfo Weather, double DistanceKm);
