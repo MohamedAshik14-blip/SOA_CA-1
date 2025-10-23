@@ -141,6 +141,43 @@
                             }
                         </div>
 
+                        @if (displayCount < filteredCities.Count)
+                        {
+                            <div class="text-center mt-3">
+                                <button class="btn btn-outline-primary" @onclick="LoadMore">Show more</button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+  @if (showFavorites)
+    {
+        <div class="trip-card favorites-panel">
+            <h5>⭐ Favorites</h5>
+            @if (favorites?.Any() == true)
+            {
+                <div class="list-group">
+                    @foreach (var fav in favorites)
+                    {
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="fav-text" @onclick="() => LoadCountry(fav)">@fav</div>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary me-2" @onclick="() => LoadCountry(fav)">Open</button>
+                                <button class="btn btn-sm btn-outline-danger" @onclick="() => RemoveFavorite(fav)">Remove</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="p-3 text-muted">No favorites saved</div>
+            }
+        </div>
+    }
+
 @code {
     private record CityWithWeather(GeoCityDto City, WeatherInfo Weather, double DistanceKm);
 
@@ -398,4 +435,16 @@ private void ResetFilters()
         favorites.Remove(fav);
         await LocalStorage.SetItemAsync("favorites", favorites);
     }
+ private string ExtractCountryCode(string countryName)
+    {
+        var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            {"United States", "US"}, {"United Kingdom", "GB"}, {"Ireland", "IE"},
+            {"France","FR"}, {"Germany","DE"}, {"Canada","CA"}
+        };
+        return map.TryGetValue(countryName, out var code)
+            ? code
+            : countryName[..Math.Min(2, countryName.Length)].ToUpperInvariant();
+    }
 }
+
