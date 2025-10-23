@@ -11,7 +11,7 @@ public class IpApiResponse
     public double lat { get; set; }
     public double lon { get; set; }
 }
-Public class GeolocationService : ILocationService
+public class GeolocationService : ILocationService
 {
     private readonly HttpClient _http;
     private readonly string _openWeatherApiKey;
