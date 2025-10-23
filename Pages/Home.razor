@@ -1,7 +1,51 @@
-﻿@page "/"
+@page "/"
+@using WeatherApp.Services
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="home-hero text-white text-center d-flex flex-column justify-content-center align-items-center">
+    <h1 class="display-4 fw-bold mb-3">🌍 Welcome to Weather & Trip Planner</h1>
+    <p class="lead mb-4">Plan your trips, explore top cities, and get real-time weather info—all in one place.</p>
+    <div>
+        <NavLink href="tripplanner" class="btn btn-light btn-lg">
+            <i class="fas fa-map-marker-alt me-2"></i> Trip Planner
+        </NavLink>
+    </div>
+</div>
 
-Welcome to your new app.
+<div class="container my-5">
+    <h2 class="mb-4 text-center">Features at a Glance</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card feature-card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                    <i class="fas fa-globe fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Global Cities</h5>
+                    <p class="card-text">Explore population, distance, and weather for thousands of cities worldwide.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                    <i class="fas fa-cloud-sun-rain fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Live Weather</h5>
+                    <p class="card-text">Get current weather conditions and a 3-day forecast for any city you choose.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                    <i class="fas fa-star fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Favorites</h5>
+                    <p class="card-text">Save your favorite cities or countries and quickly access them anytime.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
