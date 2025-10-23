@@ -263,6 +263,38 @@ private void ResetFilters()
         showFavorites = true;
         StateHasChanged();
     }
+ private async Task AddCityFavorite(string city)
+    {
+        favorites = await LocalStorage.GetItemAsync<List<string>>("favorites") ?? new();
+        if (!favorites.Contains(city))
+        {
+            favorites.Add(city);
+            await LocalStorage.SetItemAsync("favorites", favorites);
+            showFavorites = true;
+            StateHasChanged();
+        }
+    }
+
+    private async Task ToggleFavorites()
+    {
+        favorites = await LocalStorage.GetItemAsync<List<string>>("favorites") ?? new();
+        showFavorites = !showFavorites;
+        StateHasChanged();
+    }
+
+    private async Task LoadCountry(string name)
+    {
+        searchCountry = name;
+        showFavorites = false;
+        await SearchCountryOrCity();
+    }
+
+    private async Task RemoveFavorite(string fav)
+    {
+        favorites.Remove(fav);
+        await LocalStorage.SetItemAsync("favorites", favorites);
+        StateHasChanged();
+    }
 
  private async Task LoadFavorites()
     {
