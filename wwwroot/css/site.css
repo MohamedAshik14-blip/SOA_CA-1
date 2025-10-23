@@ -12,3 +12,42 @@ body {
     padding: 18px;
     box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
 }
+
+.home-hero {
+    height: 60vh;
+    background: linear-gradient(to right, #1e3a8a, #4338ca);
+    padding: 2rem;
+}
+
+.home-hero h1 {
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.home-hero p {
+    font-size: 1.25rem;
+}
+
+
+.feature-card {
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.feature-card i {
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover i {
+    transform: scale(1.2);
+}
+
+.page {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
