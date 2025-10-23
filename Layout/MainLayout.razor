@@ -1,26 +1,56 @@
 @inherits LayoutComponentBase
 
-<div class="container">
-    <div class="py-3">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">Trip Planner</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/tripplanner">Planner</a>
-                        </li>
-                    </ul>
-                </div>
+<div class="page">
+    
+    <div class="@NavMenuCssClass sidebar shadow-sm">
+        <nav class="nav flex-column py-4">
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                    <i class="fas fa-home me-2"></i> Home
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="counter">
+                    <i class="fas fa-plus-square me-2"></i> Counter
+                </NavLink>
+            </div>
+           
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="tripplanner">
+                    <i class="fas fa-map-marker-alt me-2"></i> Trip Planner
+                </NavLink>
             </div>
         </nav>
     </div>
 
-    <main>
-        @Body
-    </main>
 
-    <footer class="text-center text-muted mt-4">
-        <small>TripPlanner — Demo for SD4 Cloud & SOA</small>
-    </footer>
+   
+    <div class="main-content">
+      
+        <div class="top-row d-flex align-items-center justify-content-between shadow-sm">
+            <a class="navbar-brand text-white fw-bold" href="/">🌤️ WeatherApp</a>
+        
+            <div class="hamburger" @onclick="ToggleNavMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+       
+        </div>
+
+        <main class="content p-4">
+            @Body
+        </main>
+
+        <footer class="footer text-center text-muted border-top py-3 mt-4">
+            <small>🌍 TripPlanner & WeatherApp — Demo for SD4 Cloud & SOA</small>
+        </footer>
+    </div>
 </div>
+
+@code {
+    private bool collapseNavMenu = false;
+    private string? NavMenuCssClass => collapseNavMenu ? "sidebar collapsed" : "sidebar";
+
+    private void ToggleNavMenu() => collapseNavMenu = !collapseNavMenu;
+}
