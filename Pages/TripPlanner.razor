@@ -55,6 +55,43 @@
             </div>
 
             <hr />
+ <div class="row mb-3 gx-4">
+                <div class="col-lg-4">
+                   
+                    <div class="filters-panel p-3">
+                        <h6 class="mb-3">Filters</h6>
+
+                        <label class="form-label small">Temperature (°C)</label>
+                        <div class="d-flex gap-2 mb-3">
+                            <input type="number" class="form-control" @bind="minTemp" />
+                            <input type="number" class="form-control" @bind="maxTemp" />
+                        </div>
+
+                        <label class="form-label small">Weather Type</label>
+                        <select class="form-select mb-3" @bind="selectedWeather">
+                            <option value="">Any</option>
+                            <option value="Sunny">Sunny</option>
+                            <option value="Cloudy">Cloudy</option>
+                            <option value="Rainy">Rainy</option>
+                            <option value="Snowy">Snowy</option>
+                        </select>
+
+                        <label class="form-label small">Max distance (km): <strong>@maxDistanceKm</strong></label>
+                        <input type="range" min="10" max="20000" step="10" class="form-range mb-3" @bind="maxDistanceKm" />
+
+                        <label class="form-label small">Sort by</label>
+                        <select class="form-select mb-3" @bind="sortBy">
+                            <option value="population">Population (desc)</option>
+                            <option value="distance">Distance (asc)</option>
+                            <option value="temperature">Temperature (asc)</option>
+                        </select>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-secondary btn-sm" @onclick="ApplyFilters">Apply</button>
+                            <button class="btn btn-outline-secondary btn-sm" @onclick="ResetFilters">Reset</button>
+                        </div>
+                    </div>
+                </div>
 
 @code {
     private record CityWithWeather(GeoCityDto City, WeatherInfo Weather, double DistanceKm);
