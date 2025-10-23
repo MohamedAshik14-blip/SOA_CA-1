@@ -435,4 +435,16 @@ private void ResetFilters()
         favorites.Remove(fav);
         await LocalStorage.SetItemAsync("favorites", favorites);
     }
+ private string ExtractCountryCode(string countryName)
+    {
+        var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            {"United States", "US"}, {"United Kingdom", "GB"}, {"Ireland", "IE"},
+            {"France","FR"}, {"Germany","DE"}, {"Canada","CA"}
+        };
+        return map.TryGetValue(countryName, out var code)
+            ? code
+            : countryName[..Math.Min(2, countryName.Length)].ToUpperInvariant();
+    }
 }
+
