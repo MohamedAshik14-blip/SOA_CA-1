@@ -92,6 +92,54 @@
                         </div>
                     </div>
                 </div>
+   <div class="col-lg-8">
+                 
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0">Top cities (@filteredCities?.Count())</h6>
+                        <div class="small text-muted">Showing @displayCount of @enrichedCities.Count</div>
+                    </div>
+
+                    @if (filteredCities?.Any() != true)
+                    {
+                        <div class="empty-state p-4 text-center rounded">No matching cities — try adjusting filters.</div>
+                    }
+                    else
+                    {
+                        <div class="city-grid">
+                            @foreach (var item in filteredCities.Take(displayCount))
+                            {
+                                <div class="city-card">
+                                    <div class="city-card-header d-flex justify-content-between">
+                                        <div>
+                                            <div class="city-name">@item.City.Name</div>
+                                            <div class="small text-muted">@item.City.AdminName1</div>
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="city-pop">POP @item.City.Population</div>
+                                            <div class="small text-muted">@item.City.CountryName</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="city-card-body mt-2">
+                                        <div class="d-flex align-items-center gap-3 mb-2">
+                                            <div class="weather-pill">@item.Weather.Type</div>
+                                            <div class="temp-large">@item.Weather.TemperatureC.ToString("0.0")°C</div>
+                                            <div class="small text-muted">@item.Weather.Description</div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between align-items-center mt-2">
+                                            <div class="small text-muted">Distance</div>
+                                            <div class="fw-bold">@Math.Round(item.DistanceKm, 1) km</div>
+                                        </div>
+
+                                        <div class="mt-3 d-flex justify-content-between">
+                                            <button class="btn btn-outline-primary btn-sm" @onclick="() => ShowCityDetails(item)">Details</button>
+                                            <button class="btn btn-outline-danger btn-sm" @onclick="() => AddCityFavorite(item.City.Name)">Fav</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
 
 @code {
     private record CityWithWeather(GeoCityDto City, WeatherInfo Weather, double DistanceKm);
