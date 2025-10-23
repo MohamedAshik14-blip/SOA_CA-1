@@ -141,6 +141,18 @@
                             }
                         </div>
 
+                        @if (displayCount < filteredCities.Count)
+                        {
+                            <div class="text-center mt-3">
+                                <button class="btn btn-outline-primary" @onclick="LoadMore">Show more</button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
 @code {
     private record CityWithWeather(GeoCityDto City, WeatherInfo Weather, double DistanceKm);
 
