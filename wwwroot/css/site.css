@@ -51,3 +51,179 @@ body {
     min-height: 100vh;
     background-color: #f8f9fa;
 }
+body {
+    background: linear-gradient(180deg, #e8f0ff 0%, #ffffff 100%);
+    font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+}
+
+
+.app-container {
+    max-width: 980px;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+
+
+h2, h4, h5 {
+    color: #0f172a;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+p {
+    margin: 4px 0;
+}
+
+
+.trip-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    margin-bottom: 28px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.trip-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+}
+
+
+input.form-control {
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+input.form-control:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    outline: none;
+}
+
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 0.45rem 1rem;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.btn:hover {
+    transform: translateY(-1px);
+}
+.btn:active {
+    transform: translateY(1px);
+}
+
+
+.btn-primary {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+}
+.btn-primary:hover {
+    background-color: #2563eb;
+}
+.btn-outline-secondary {
+    border-color: #94a3b8;
+    color: #334155;
+}
+.btn-outline-secondary:hover {
+    background-color: #f1f5f9;
+}
+
+.bg-light {
+    background: linear-gradient(145deg, #f8fafc, #eef2ff);
+    border: 1px solid #e2e8f0;
+}
+.fs-4, .fs-5 {
+    color: #1d4ed8;
+    font-weight: 600;
+}
+
+
+.d-flex.gap-3.flex-wrap > div {
+    flex: 1 1 150px;
+    transition: transform 0.2s ease;
+}
+.d-flex.gap-3.flex-wrap > div:hover {
+    transform: scale(1.03);
+}
+
+
+.list-group-item {
+    border-radius: 8px !important;
+    transition: background 0.2s ease;
+}
+.list-group-item:hover {
+    background: #f1f5f9;
+}
+
+.loader {
+    animation: spin 1s linear infinite;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #3b82f6;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.alert {
+    border-radius: 10px;
+    padding: 14px;
+    font-weight: 500;
+}
+
+
+.trip-card, .alert, .p-3 {
+    animation: fadeIn 0.4s ease-in;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.navbar-collapse.show {
+    animation: slideIn 0.25s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.app-container { max-width: 1100px; margin: 28px auto; font-family: "Segoe UI", Roboto, Arial; }
+.page-title { margin: 0; font-weight: 600; }
+
+
+.trip-card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 10px 30px rgba(19, 34, 55, 0.06); margin-bottom: 18px; }
+.flag-img { border-radius: 8px; box-shadow: 0 6px 14px rgba(18, 40, 80, 0.06); }
+
+
+.filters-panel { background: linear-gradient(180deg,#fbfcff 0,#fff 100%); border-radius: 10px; border: 1px solid rgba(0,0,0,0.04); }
+
+
+.city-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.city-card { background: linear-gradient(180deg,#ffffff 0,#fbfdff 100%); border-radius: 12px; padding: 14px; border: 1px solid rgba(12,20,40,0.04); transition: transform .12s ease, box-shadow .12s ease; }
+.city-card:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(11,24,54,0.08); }
+.city-card-header .city-name { font-size: 1.05rem; font-weight: 700; }
+.city-pop { font-size: 0.9rem; color: #666; }
+
+
+.weather-pill { background: rgba(13,110,253,0.08); color: #0d6efd; padding: 6px 10px; border-radius: 999px; font-weight:600; font-size:0.82rem; }
+.temp-large { font-size: 1.3rem; font-weight:700; margin-left: 8px; }
+
+
+.empty-state { background: #f8f9fb; border-radius:10px; border:1px dashed rgba(0,0,0,0.04); }
+
+
+.favorites-panel { margin-top: 14px; }
+
+
+@media (max-width: 900px) {
+    .city-grid { grid-template-columns: 1fr; }
+    .trip-card { padding: 14px; }
+    .flag-img { width: 90px; }
+}
