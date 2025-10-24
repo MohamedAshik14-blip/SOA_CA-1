@@ -75,6 +75,8 @@ Tutorials / Code References:
 	•	StackOverflow: Get Data From External API with Blazor WASM (https://stackoverflow.com/questions/66824354/get-data-from-external-api-with-blazor-wasm)
 	•	StackOverflow: Blazor WebAssembly - Calling External API (https://stackoverflow.com/questions/62398811/blazor-webassembly-calling-external-api)
 	•	StackOverflow: Blazor WebAssembly Third Party API (https://stackoverflow.com/questions/65951330/blazor-webassembly-third-party-api)
-  •	YouTube Tutorial: Blazor WebAssembly + REST API Integration (https://www.youtube.com/watch?v=7C9c_-nXoNo)
+    •	YouTube Tutorial: Blazor WebAssembly + REST API Integration (https://www.youtube.com/watch?v=7C9c_-nXoNo)
 	•	Blazored.LocalStorage GitHub Repository (https://github.com/Blazored/LocalStorage)
+	•   Stack Overflow – Mocking HttpClient using Moq (https://stackoverflow.com/questions/39008071/how-to-mock-httpclient-in-unit-tests)
+	•	Stack Overflow – Writing async unit tests in xUnit (https://stackoverflow.com/questions/14790599/unit-testing-with-async-await)
 
