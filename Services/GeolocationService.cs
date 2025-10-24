@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using System.Text.Json;
+using TripPlannerApp.Models;
 using WeatherApp.Models;
 
 namespace WeatherApp.Services;

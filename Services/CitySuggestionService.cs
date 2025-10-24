@@ -24,7 +24,8 @@ namespace WeatherApp.Services
             _http = http;
         }
 
-       public async Task<List<GeoCityDto>> GetTopCitiesAsync(string countryCode, int max = 10)
+    
+        public async Task<List<GeoCityDto>> GetTopCitiesAsync(string countryCode, int max = 10)
         {
             try
             {
@@ -60,3 +61,24 @@ namespace WeatherApp.Services
             }
         }
 
+        private static bool TryParseDouble(string? s, out double v)
+        {
+            v = 0;
+            if (string.IsNullOrEmpty(s)) return false;
+            return double.TryParse(s, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out v);
+        }
+
+      
+        private class GeoNamesResponse { public List<GeoCityRaw> Geonames { get; set; } = new(); }
+        private class GeoCityRaw
+        {
+            public string? name { get; set; }
+            public string? adminName1 { get; set; }
+            public string? countryName { get; set; }
+            public string? countryCode { get; set; }
+            public string? lat { get; set; }
+            public string? lng { get; set; }
+            public long population { get; set; }
+        }
+    }
+}
