@@ -2,7 +2,7 @@
 
 Project Overview
 
-Weather & Trip Planner is a Blazor Web Application built in C# for the SD4 SOA module.
+Weather & Trip Planner is a Blazor Web Application built in C#.
 It allows users to:
 
 	•	Search for countries and cities info
@@ -13,7 +13,6 @@ It allows users to:
     
 	•	Save favorites for quick access
 
-This project demonstrates Service-Oriented Architecture (SOA) principles using multiple RESTful web services, integrating them into a contextualized trip-planning domain.
 
 ⸻
 
@@ -33,7 +32,7 @@ APIs Used
 
 	•	Purpose: Provides current weather data and 3-day forecasts (temperature, description, and condition type).
 
-	•	Used In: WeatherService.cs
+	•	Used In: OpenWeatherService.cs
 
 5. GeoDB Cities API
    
@@ -41,7 +40,7 @@ APIs Used
 
 	•	Purpose: Supplies city data such as name, population, latitude, longitude, and country.
 
-	•	Used In: CityService.cs
+	•	Used In: CitySuggestionService.cs
 
 ⸻
 
@@ -58,6 +57,9 @@ Key Features:
 	•	Sorting & Filtering: Sort by population, temperature, or distance.
     
 	•	Modular Architecture: Uses clean service classes and dependency injection.
+	
+	•   Written Unit Test Cases for this Web Application.
+	
 
 ⸻
 
