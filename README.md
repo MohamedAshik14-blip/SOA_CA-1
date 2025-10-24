@@ -2,7 +2,7 @@
 
 Project Overview
 
-Weather & Trip Planner is a Blazor Web Application built in C#.
+Weather & Trip Planner is a Blazor Web Application built in C# and also written unit test cases for this application.
 It allows users to:
 
 	•	Search for countries and cities info
