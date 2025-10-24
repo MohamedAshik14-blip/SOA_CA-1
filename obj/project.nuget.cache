@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1F3jKtTh6mA=",
+  "dgSpecHash": "u5uYSb3eNOk=",
   "success": true,
-  "projectFilePath": "/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/WeatherApp.csproj",
+  "projectFilePath": "/Users/mohamedashiks/Desktop/SOA_CA-1/WeatherApp.csproj",
   "expectedPackageFiles": [
     "/Users/mohamedashiks/.nuget/packages/blazored.localstorage/4.5.0/blazored.localstorage.4.5.0.nupkg.sha512",
     "/Users/mohamedashiks/.nuget/packages/microsoft.aspnetcore.authorization/8.0.14/microsoft.aspnetcore.authorization.8.0.14.nupkg.sha512",
@@ -30,9 +30,11 @@
     "/Users/mohamedashiks/.nuget/packages/microsoft.jsinterop/8.0.14/microsoft.jsinterop.8.0.14.nupkg.sha512",
     "/Users/mohamedashiks/.nuget/packages/microsoft.jsinterop.webassembly/8.0.14/microsoft.jsinterop.webassembly.8.0.14.nupkg.sha512",
     "/Users/mohamedashiks/.nuget/packages/microsoft.net.illink.tasks/8.0.20/microsoft.net.illink.tasks.8.0.20.nupkg.sha512",
-    "/Users/mohamedashiks/.nuget/packages/microsoft.net.sdk.webassembly.pack/8.0.20/microsoft.net.sdk.webassembly.pack.8.0.20.nupkg.sha512",
+    "/Users/mohamedashiks/.nuget/packages/microsoft.net.sdk.webassembly.pack/9.0.9/microsoft.net.sdk.webassembly.pack.9.0.9.nupkg.sha512",
     "/Users/mohamedashiks/.nuget/packages/system.io.pipelines/8.0.0/system.io.pipelines.8.0.0.nupkg.sha512",
-    "/Users/mohamedashiks/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/8.0.20/microsoft.netcore.app.runtime.mono.browser-wasm.8.0.20.nupkg.sha512"
+    "/Users/mohamedashiks/.nuget/packages/microsoft.netcore.app.ref/8.0.20/microsoft.netcore.app.ref.8.0.20.nupkg.sha512",
+    "/Users/mohamedashiks/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/8.0.20/microsoft.netcore.app.runtime.mono.browser-wasm.8.0.20.nupkg.sha512",
+    "/Users/mohamedashiks/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.20/microsoft.aspnetcore.app.ref.8.0.20.nupkg.sha512"
   ],
   "logs": []
 }

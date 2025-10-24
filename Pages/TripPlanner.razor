@@ -1,4 +1,5 @@
 @page "/tripplanner"
+@using TripPlannerApp.Models
 @using WeatherApp.Models
 @using WeatherApp.Services
 @inject IWeatherService WeatherService
@@ -55,7 +56,8 @@
             </div>
 
             <hr />
- <div class="row mb-3 gx-4">
+
+            <div class="row mb-3 gx-4">
                 <div class="col-lg-4">
                    
                     <div class="filters-panel p-3">
@@ -92,7 +94,8 @@
                         </div>
                     </div>
                 </div>
-   <div class="col-lg-8">
+
+                <div class="col-lg-8">
                  
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <h6 class="mb-0">Top cities (@filteredCities?.Count())</h6>
@@ -152,7 +155,8 @@
             </div>
         </div>
     }
-  @if (showFavorites)
+
+    @if (showFavorites)
     {
         <div class="trip-card favorites-panel">
             <h5>⭐ Favorites</h5>
@@ -177,7 +181,9 @@
             }
         </div>
     }
-@if (showDetails && selectedCity != null)
+
+
+    @if (showDetails && selectedCity != null)
     {
         <div class="modal-backdrop fade show"></div>
         <div class="modal fade show d-block" tabindex="-1" style="background-color:rgba(0,0,0,0.4)">
@@ -346,7 +352,8 @@
             StateHasChanged();
         }
     }
- private async Task<CityWithWeather?> EnrichCityAsync(GeoCityDto city)
+
+    private async Task<CityWithWeather?> EnrichCityAsync(GeoCityDto city)
     {
         try
         {
@@ -377,7 +384,7 @@
         StateHasChanged();
     }
 
-private void ResetFilters()
+    private void ResetFilters()
     {
         minTemp = -50;
         maxTemp = 50;
@@ -423,7 +430,8 @@ private void ResetFilters()
         showFavorites = true;
         StateHasChanged();
     }
- private async Task AddCityFavorite(string city)
+
+    private async Task AddCityFavorite(string city)
     {
         favorites = await LocalStorage.GetItemAsync<List<string>>("favorites") ?? new();
         if (!favorites.Contains(city))
@@ -456,24 +464,7 @@ private void ResetFilters()
         StateHasChanged();
     }
 
- private async Task LoadFavorites()
-    {
-        favorites = await LocalStorage.GetItemAsync<List<string>>("favorites") ?? new();
-    }
-
-
-    private async Task LoadCountry(string name)
-    {
-        searchCountry = name;
-        await SearchCountry();
-    }
-
-    private async Task RemoveFavorite(string fav)
-    {
-        favorites.Remove(fav);
-        await LocalStorage.SetItemAsync("favorites", favorites);
-    }
- private string ExtractCountryCode(string countryName)
+    private string ExtractCountryCode(string countryName)
     {
         var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
@@ -485,4 +476,3 @@ private void ResetFilters()
             : countryName[..Math.Min(2, countryName.Length)].ToUpperInvariant();
     }
 }
-

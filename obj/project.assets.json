@@ -439,7 +439,7 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.20": {
+      "Microsoft.NET.Sdk.WebAssembly.Pack/9.0.9": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
@@ -901,7 +901,7 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.20": {
+      "Microsoft.NET.Sdk.WebAssembly.Pack/9.0.9": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
@@ -1804,10 +1804,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.20": {
-      "sha512": "T8IgvEg6M4INrHw9K89JjslxP0D6fHYiogFvarNPSjfusHdV/KvwJU4YC1+lNOIIgpjslkb4WWSW9IuNxHdPLg==",
+    "Microsoft.NET.Sdk.WebAssembly.Pack/9.0.9": {
+      "sha512": "Nx4yF/l8YyzwHM+xBRFOSGv77mjBZP0XkImzLMdrSBGYPB32nEZNXTSwhH9viDhxMhGij+fVUjJj5iAtUdMBww==",
       "type": "package",
-      "path": "microsoft.net.sdk.webassembly.pack/8.0.20",
+      "path": "microsoft.net.sdk.webassembly.pack/9.0.9",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -1818,6 +1818,7 @@
         "WasmAppHost/BrowserDebugHost.deps.json",
         "WasmAppHost/BrowserDebugHost.dll",
         "WasmAppHost/BrowserDebugHost.runtimeconfig.json",
+        "WasmAppHost/BrowserDebugHost.staticwebassets.endpoints.json",
         "WasmAppHost/BrowserDebugProxy.dll",
         "WasmAppHost/Microsoft.CodeAnalysis.CSharp.Scripting.dll",
         "WasmAppHost/Microsoft.CodeAnalysis.CSharp.dll",
@@ -1830,17 +1831,19 @@
         "WasmAppHost/WasmAppHost.deps.json",
         "WasmAppHost/WasmAppHost.dll",
         "WasmAppHost/WasmAppHost.runtimeconfig.json",
+        "WasmAppHost/WasmAppHost.staticwebassets.endpoints.json",
         "build/Microsoft.NET.Sdk.WebAssembly.Browser.props",
         "build/Microsoft.NET.Sdk.WebAssembly.Browser.targets",
         "build/Microsoft.NET.Sdk.WebAssembly.Pack.props",
         "build/Microsoft.NET.Sdk.WebAssembly.Pack.targets",
         "build/Wasm.web.config",
-        "microsoft.net.sdk.webassembly.pack.8.0.20.nupkg.sha512",
+        "build/browser.runtimeconfig.template.json",
+        "microsoft.net.sdk.webassembly.pack.9.0.9.nupkg.sha512",
         "microsoft.net.sdk.webassembly.pack.nuspec",
         "tools/net472/Microsoft.NET.Sdk.WebAssembly.Pack.Tasks.dll",
         "tools/net472/Microsoft.NET.WebAssembly.Webcil.dll",
-        "tools/net8.0/Microsoft.NET.Sdk.WebAssembly.Pack.Tasks.dll",
-        "tools/net8.0/Microsoft.NET.WebAssembly.Webcil.dll"
+        "tools/net9.0/Microsoft.NET.Sdk.WebAssembly.Pack.Tasks.dll",
+        "tools/net9.0/Microsoft.NET.WebAssembly.Webcil.dll"
       ]
     },
     "System.IO.Pipelines/8.0.0": {
@@ -1879,7 +1882,7 @@
       "Microsoft.AspNetCore.Components.WebAssembly >= 8.0.14",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 8.0.14",
       "Microsoft.NET.ILLink.Tasks >= 8.0.20",
-      "Microsoft.NET.Sdk.WebAssembly.Pack >= 8.0.20"
+      "Microsoft.NET.Sdk.WebAssembly.Pack >= 9.0.9"
     ]
   },
   "packageFolders": {
@@ -1888,11 +1891,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/WeatherApp.csproj",
+      "projectUniqueName": "/Users/mohamedashiks/Desktop/SOA_CA-1/WeatherApp.csproj",
       "projectName": "WeatherApp",
-      "projectPath": "/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/WeatherApp.csproj",
+      "projectPath": "/Users/mohamedashiks/Desktop/SOA_CA-1/WeatherApp.csproj",
       "packagesPath": "/Users/mohamedashiks/.nuget/packages/",
-      "outputPath": "/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/obj/",
+      "outputPath": "/Users/mohamedashiks/Desktop/SOA_CA-1/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mohamedashiks/.nuget/NuGet/NuGet.Config"
@@ -1901,7 +1904,6 @@
         "net8.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1919,7 +1921,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -1947,7 +1950,7 @@
           "Microsoft.NET.Sdk.WebAssembly.Pack": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.20, )",
+            "version": "[9.0.9, )",
             "autoReferenced": true
           }
         },
@@ -1964,6 +1967,14 @@
         "warn": true,
         "downloadDependencies": [
           {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.20, 8.0.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.20, 8.0.20]"
+          },
+          {
             "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
             "version": "[8.0.20, 8.0.20]"
           }
@@ -1973,7 +1984,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.414/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/mohamedashiks/.dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

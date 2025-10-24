@@ -13,51 +13,45 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = WeatherApp
 build_property.RootNamespace = WeatherApp
-build_property.ProjectDir = /Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/
+build_property.ProjectDir = /Users/mohamedashiks/Desktop/SOA_CA-1/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp
+build_property.MSBuildProjectDirectory = /Users/mohamedashiks/Desktop/SOA_CA-1
 build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
 
-[/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/App.razor]
+[/Users/mohamedashiks/Desktop/SOA_CA-1/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/Pages/Counter.razor]
+[/Users/mohamedashiks/Desktop/SOA_CA-1/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/Pages/Home.razor]
+[/Users/mohamedashiks/Desktop/SOA_CA-1/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/Pages/TripPlanner.razor]
+[/Users/mohamedashiks/Desktop/SOA_CA-1/Pages/TripPlanner.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVHJpcFBsYW5uZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/Pages/Weather.razor]
+[/Users/mohamedashiks/Desktop/SOA_CA-1/Pages/Weather.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvV2VhdGhlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/Shared/MainLayout.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/Shared/NavMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05hdk1lbnUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/_Imports.razor]
+[/Users/mohamedashiks/Desktop/SOA_CA-1/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/Layout/MainLayout.razor]
+[/Users/mohamedashiks/Desktop/SOA_CA-1/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L01haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-ejw3fa7c9x
 
-[/Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/Layout/NavMenu.razor]
+[/Users/mohamedashiks/Desktop/SOA_CA-1/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L05hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-14hnm6pbcb

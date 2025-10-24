@@ -1035,3 +1035,14 @@
 /Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/obj/Debug/net8.0/refint/WeatherApp.dll
 /Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/obj/Debug/net8.0/WeatherApp.pdb
 /Users/mohamedashiks/RiderProjects/WeatherApp/WeatherApp/obj/Debug/net8.0/ref/WeatherApp.dll
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/WeatherApp.csproj.AssemblyReference.cache
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/rpswa.dswa.cache.json
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/WeatherApp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/WeatherApp.AssemblyInfoInputs.cache
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/WeatherApp.AssemblyInfo.cs
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/WeatherApp.csproj.CoreCompileInputs.cache
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/WeatherApp.MvcApplicationPartsAssemblyInfo.cache
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/WeatherApp.sourcelink.json
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/WeatherApp.dll
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/refint/WeatherApp.dll
+/Users/mohamedashiks/Desktop/SOA_CA-1/obj/Debug/net8.0/WeatherApp.pdb
